@@ -1,6 +1,8 @@
 #ifndef ARCHIVOAPUNTES_H
 #define ARCHIVOAPUNTES_H
 #include <iostream>
+#include <fstream>
+#include <iostream>
 #include "Clase.h"
 #include "Apunte.h"
 #include <vector>
@@ -22,14 +24,10 @@ class ArchivoApuntes {
 		Clase* cargarClase();
 		void cargarApuntes(vector<Clase*>);
 		void cargarApunte(vector<Clase*>);
-		//guardar binarios digo yo
 		void guardarClases(vector <Clase*>);
 		void guardarClase(vector <Clase*>);
 		void guardarApuntes(vector <Clase*>);
 		void guardarApunte(Apunte*,string);
-
-
-
 };
 
 #endif

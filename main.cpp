@@ -119,7 +119,7 @@ int main(int argc, char** argv) {
 								cout<<"Hola"<<endl;
 								int opcion22=0;
 								while(opcion22 != 3) {
-									
+
 									mostrarClases(vectorClase);
 									int posicion=0;
 									cout<<"Ingrese la posicion que desea modificar:";
@@ -249,11 +249,19 @@ int main(int argc, char** argv) {
 				break;
 			}
 			case 3: {
+				cout<<"====Cargar Archivo===="<<endl;
+
+
 
 				break;
 			}
 			case 4: {
-
+				cout<<"====Guardar Archivo===="<<endl;
+				
+				/*
+				
+				
+				*/
 				break;
 			}
 			case 5: {
