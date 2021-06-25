@@ -52,10 +52,12 @@ void ArchivoApuntes::cargarApunte(vector<Clase*> vectClass) {
 }
 
 void ArchivoApuntes::guardarClases(vector <Clase*> vectClass) {
+	
 	int cant = vectClass.size();
 	for(int i=0; i<cant; i++) {
 		guardarClase(vectClass[i]);
 	}
+	
 }
 
 void ArchivoApuntes::guardarClase(Clase* clase) {
