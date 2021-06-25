@@ -17,6 +17,17 @@ int miniMenuModificarApunte() {
 	return opcion;
 }
 
+int miniMenuModificarClase() {
+	int opcion=0;
+	cout<<"===Modificar Clase==="<<endl;
+	cout<<"1) Modificar Nombre"<<endl;
+	cout<<"2) Cambiar el apunte"<<endl;
+	cout<<"3) Salida"<<endl;
+	cout<<"Elija su opcion:";
+	cin>>opcion;
+	return opcion;
+}
+
 void mostrarApuntes(vector<Apunte*> vectorAp) {
 	cout<<endl<<"\n===Apunte==="<<endl;
 	for(int i=0; i<vectorAp.size(); i++) {
@@ -28,8 +39,7 @@ void mostrarApuntes(vector<Apunte*> vectorAp) {
 void mostrarClases(vector<Clase*> vectorC) {
 	cout<<endl<<"\n===Clases==="<<endl;
 	for(int i=0; i<vectorC.size(); i++) {
-		cout<<" )Nombre:"<<vectorC[i]->getNombre();
-		cout<<i<<"Titulo:"<<vectorC[i]->getApuntes()[i]->getTitulo() << "  Contenido:"<< vectorC[i]->getApuntes()[i]->getContenido() << "  Fecha:"<< vectorC[i]->getApuntes()[i]->getContenido() <<endl;
+		cout<<i<<" )Nombre:" << vectorC[i]->getNombre() << endl;
 	}
 }
 
@@ -49,7 +59,7 @@ int menuPrincipal() {
 
 int menuClase() {
 	int opcion=0;
-	cout<<"===Menu Clase==="<<endl;
+	cout<<"\n===Menu Clase==="<<endl;
 	cout<<"1) Crear Clase"<<endl;
 	cout<<"2) Modificar Clase"<<endl;
 	cout<<"3) Eliminar Clase"<<endl;
@@ -85,44 +95,77 @@ int main(int argc, char** argv) {
 		opcion = menuPrincipal();
 		switch(opcion) {
 			case 1: {
-				int opcion2=0;
-				while(opcion2 != 5) {
-					opcion2 = menuClase();
-					switch(opcion2) {
-						case 1: {
-							int posicion2=0;
-							string nombre;
-							mostrarApuntes(vectorApuntes);
-							cout<<"Ingrese la posicion del apunte que desea:";
-							cin>>posicion2;
-							cout<<"Ingrese el nombre de la clase:";
-							getline(cin,nombre);
-							getline(cin,nombre);
-							vectorClase.push_back(new Clase(nombre,vectorApuntes[posicion2]));
-							break;
-						}
-						case 2: {
+				if(vectorApuntes.empty()) {
+					cout<<"No se pueden hacer clases sin un apunte"<<endl;
+				} else {
 
-							break;
+					int opcion2=0;
+					while(opcion2 != 5) {
+						opcion2 = menuClase();
+						switch(opcion2) {
+							case 1: {
+								int posicion2=0;
+								string nombre;
+								mostrarApuntes(vectorApuntes);
+								cout<<"Ingrese la posicion del apunte que desea:";
+								cin>>posicion2;
+								cout<<"Ingrese el nombre de la clase:";
+								getline(cin,nombre);
+								getline(cin,nombre);
+								vectorClase.push_back(new Clase(nombre,vectorApuntes[posicion2]));
+								break;
+							}
+							case 2: {
+								cout<<"Hola"<<endl;
+								int opcion22=0;
+								while(opcion22 != 3) {
+									
+									mostrarClases(vectorClase);
+									int posicion=0;
+									cout<<"Ingrese la posicion que desea modificar:";
+									cin>>posicion;
+
+									opcion22 = miniMenuModificarClase();
+									switch(opcion22) {
+										case 1: {
+											string nombre="";
+											cout<<"Ingrese el nuevo nombre:";
+											getline(cin,nombre);
+											getline(cin,nombre);
+											vectorClase[posicion]->setNombre(nombre);
+											break;
+										}
+										case 2: {
+											int posicion31=0;
+											mostrarApuntes(vectorApuntes);
+											cout<<"Ingrese la posicion por el que desea cambiar:";
+											cin>>posicion31;
+											vectorClase[posicion]->setApuntes(vectorApuntes[posicion31],posicion31);
+											break;
+										}
+									}
+								}
+								break;
+							}
+							case 3: {
+								int posicion=0;
+								mostrarClases(vectorClase);
+								cout<<"Ingrese la posicion que desea eliminar:";
+								cin>>posicion;
+								vectorClase.erase(begin(vectorClase)+posicion);
+								break;
+							}
+							case 4: {
+								mostrarClases(vectorClase);
+								break;
+							}
+							default: {
+								cout<<"Numero Ingresado no valido!!!"<<endl;
+								break;
+							}
 						}
-						case 3: {
-							int posicion=0;
-							mostrarClases(vectorClase);
-							cout<<"Ingrese la posicion que desea eliminar:";
-							cin>>posicion;
-							vectorClase.erase(begin(vectorClase)+posicion);
-							break;
-						}
-						case 4: {
-							mostrarClases(vectorClase);
-							break;
-						}
-						default: {
-							cout<<"Numero Ingresado no valido!!!"<<endl;
-							break;
-						}
+
 					}
-
 				}
 				break;
 			}

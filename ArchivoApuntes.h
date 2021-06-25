@@ -22,6 +22,7 @@ class ArchivoApuntes {
 		Clase* cargarClase();
 		void cargarApuntes(vector<Clase*>);
 		void cargarApunte(vector<Clase*>);
+		//guardar binarios digo yo
 		void guardarClases(vector <Clase*>);
 		void guardarClase(vector <Clase*>);
 		void guardarApuntes(vector <Clase*>);
