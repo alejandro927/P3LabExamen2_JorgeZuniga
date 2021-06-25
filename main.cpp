@@ -116,47 +116,60 @@ int main(int argc, char** argv) {
 								break;
 							}
 							case 2: {
-								cout<<"Hola"<<endl;
-								int opcion22=0;
-								while(opcion22 != 3) {
 
-									mostrarClases(vectorClase);
-									int posicion=0;
-									cout<<"Ingrese la posicion que desea modificar:";
-									cin>>posicion;
+								if(vectorClase.empty()) {
+									cout<<"No se puede modificar algo si no existe!!"<<endl;
+								} else {
 
-									opcion22 = miniMenuModificarClase();
-									switch(opcion22) {
-										case 1: {
-											string nombre="";
-											cout<<"Ingrese el nuevo nombre:";
-											getline(cin,nombre);
-											getline(cin,nombre);
-											vectorClase[posicion]->setNombre(nombre);
-											break;
-										}
-										case 2: {
-											int posicion31=0;
-											mostrarApuntes(vectorApuntes);
-											cout<<"Ingrese la posicion por el que desea cambiar:";
-											cin>>posicion31;
-											vectorClase[posicion]->setApuntes(vectorApuntes[posicion31],posicion31);
-											break;
+									int opcion22=0;
+									while(opcion22 != 3) {
+
+										mostrarClases(vectorClase);
+										int posicion=0;
+										cout<<"Ingrese la posicion que desea modificar:";
+										cin>>posicion;
+
+										opcion22 = miniMenuModificarClase();
+										switch(opcion22) {
+											case 1: {
+												string nombre="";
+												cout<<"Ingrese el nuevo nombre:";
+												getline(cin,nombre);
+												getline(cin,nombre);
+												vectorClase[posicion]->setNombre(nombre);
+												break;
+											}
+											case 2: {
+												int posicion31=0;
+												mostrarApuntes(vectorApuntes);
+												cout<<"Ingrese la posicion por el que desea cambiar:";
+												cin>>posicion31;
+												vectorClase[posicion]->setApuntes(vectorApuntes[posicion31],posicion31);
+												break;
+											}
 										}
 									}
 								}
 								break;
 							}
 							case 3: {
-								int posicion=0;
-								mostrarClases(vectorClase);
-								cout<<"Ingrese la posicion que desea eliminar:";
-								cin>>posicion;
-								vectorClase.erase(begin(vectorClase)+posicion);
+								if(!vectorClase.empty()) {
+									int posicion=0;
+									mostrarClases(vectorClase);
+									cout<<"Ingrese la posicion que desea eliminar:";
+									cin>>posicion;
+									vectorClase.erase(begin(vectorClase)+posicion);
+								} else {
+									cout<<"No se puede eliminar nada si no existe algo"<<endl;
+								}
 								break;
 							}
 							case 4: {
-								mostrarClases(vectorClase);
+								if(!vectorClase.empty()) {
+									mostrarClases(vectorClase);
+								} else {
+									cout<<"No se puede enlistar nada si no existe algo"<<endl;
+								}
 								break;
 							}
 							default: {
@@ -224,19 +237,30 @@ int main(int argc, char** argv) {
 										}
 									}
 								}
+							} else {
+								cout<<"No se puede modificar algo si no existe"<<endl;
 							}
 							break;
 						}
 						case 3: {
-							int posicion=0;
-							mostrarApuntes(vectorApuntes);
-							cout<<"Ingrese la posicion que desea eliminar:";
-							cin>>posicion;
-							vectorApuntes.erase(begin(vectorApuntes)+posicion);
+							if(!vectorApuntes.empty()) {
+								int posicion=0;
+								mostrarApuntes(vectorApuntes);
+								cout<<"Ingrese la posicion que desea eliminar:";
+								cin>>posicion;
+								vectorApuntes.erase(begin(vectorApuntes)+posicion);
+							} else {
+								cout<<"No se puede eliminar si no hay nada!!!"<<endl;
+							}
+
 							break;
 						}
 						case 4: {
-							mostrarApuntes(vectorApuntes);
+							if(vectorApuntes.empty()) {
+								cout<<"No se puede imprimir lo que no existe!!"<<endl;
+							} else {
+								mostrarApuntes(vectorApuntes);
+							}
 							break;
 						}
 						default: {
@@ -249,19 +273,17 @@ int main(int argc, char** argv) {
 				break;
 			}
 			case 3: {
-				cout<<"====Cargar Archivo===="<<endl;
-
-
-
+				cout<<"====Guardar Archivo===="<<endl;
+				archivo->abrir_para_escritura();
+				archivo->guardarDatos(vectorClase);
+				archivo->cerrar();
 				break;
 			}
 			case 4: {
-				cout<<"====Guardar Archivo===="<<endl;
-				
-				/*
-				
-				
-				*/
+				cout<<"====Cargar Archivo===="<<endl;
+				archivo->abrir_para_escritura();
+				vectorClase = archivo->cargarDatos();
+				archivo->cerrar();
 				break;
 			}
 			case 5: {

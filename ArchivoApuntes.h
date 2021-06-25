@@ -19,13 +19,13 @@ class ArchivoApuntes {
 		
 	private:
 		bool staAbierto;
-		vector<Clase*> cargarClases();
-		
+		fstream* refArchivo;
+		vector<Clase*> cargarClases();		
 		Clase* cargarClase();
 		void cargarApuntes(vector<Clase*>);
 		void cargarApunte(vector<Clase*>);
 		void guardarClases(vector <Clase*>);
-		void guardarClase(vector <Clase*>);
+		void guardarClase(Clase*);
 		void guardarApuntes(vector <Clase*>);
 		void guardarApunte(Apunte*,string);
 };
