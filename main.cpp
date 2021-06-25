@@ -281,7 +281,7 @@ int main(int argc, char** argv) {
 			}
 			case 4: {
 				cout<<"====Cargar Archivo===="<<endl;
-				archivo->abrir_para_escritura();
+				archivo->abrir_para_lectura();
 				vectorClase = archivo->cargarDatos();
 				archivo->cerrar();
 				break;
